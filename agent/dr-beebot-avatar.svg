@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-label="Dr. BeeBot emblem">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#222227"/>
+      <stop offset="100%" stop-color="#141417"/>
+    </linearGradient>
+    <linearGradient id="amberGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FCD34D"/>
+      <stop offset="100%" stop-color="#F5B700"/>
+    </linearGradient>
+    <radialGradient id="lensGrad" cx="38%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#A5F3FC"/>
+      <stop offset="45%" stop-color="#22D3EE"/>
+      <stop offset="100%" stop-color="#0891B2"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Outer charcoal badge -->
+  <rect width="256" height="256" rx="44" fill="url(#bgGrad)"/>
+
+  <!-- Hexagonal lab frame -->
+  <polygon
+    points="128,16 225,72 225,184 128,240 31,184 31,72"
+    fill="#18181B"
+    stroke="#F5B700"
+    stroke-width="6"
+    stroke-linejoin="round"
+  />
+  <polygon
+    points="128,28 214,78 214,178 128,228 42,178 42,78"
+    fill="none"
+    stroke="#27272A"
+    stroke-width="2"
+    stroke-linejoin="round"
+  />
+
+  <!-- Geometric faceted bee wings -->
+  <polygon points="100,118 52,82 48,124 88,142" fill="#22D3EE" fill-opacity="0.22" stroke="#22D3EE" stroke-width="3" stroke-linejoin="round"/>
+  <polygon points="156,118 204,82 208,124 168,142" fill="#22D3EE" fill-opacity="0.22" stroke="#22D3EE" stroke-width="3" stroke-linejoin="round"/>
+
+  <!-- Antennae -->
+  <path d="M108,74 L92,46" stroke="#F5B700" stroke-width="5" stroke-linecap="round"/>
+  <path d="M148,74 L164,46" stroke="#F5B700" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="91" cy="44" r="6" fill="#22D3EE"/>
+  <circle cx="165" cy="44" r="6" fill="#22D3EE"/>
+
+  <!-- Bee thorax & striped abdomen -->
+  <ellipse cx="128" cy="166" rx="42" ry="44" fill="url(#amberGrad)" stroke="#18181B" stroke-width="4"/>
+  <!-- Charcoal bee stripes -->
+  <path d="M90,158 Q128,166 166,158 L164,174 Q128,182 92,174 Z" fill="#18181B"/>
+  <path d="M97,184 Q128,191 159,184 L151,198 Q128,204 105,198 Z" fill="#18181B"/>
+  <!-- Stinger / lab pointer -->
+  <polygon points="120,208 136,208 128,222" fill="#F5B700"/>
+
+  <!-- Bee head -->
+  <circle cx="128" cy="106" r="42" fill="#18181B" stroke="#F5B700" stroke-width="5"/>
+
+  <!-- Mad-scientist goggle strap & bridge -->
+  <rect x="82" y="98" width="92" height="14" rx="7" fill="#27272A" stroke="#F5B700" stroke-width="2.5"/>
+
+  <!-- Cyan goggles -->
+  <circle cx="106" cy="105" r="22" fill="#18181B" stroke="#F5B700" stroke-width="4.5"/>
+  <circle cx="150" cy="105" r="22" fill="#18181B" stroke="#F5B700" stroke-width="4.5"/>
+  <circle cx="106" cy="105" r="15" fill="url(#lensGrad)"/>
+  <circle cx="150" cy="105" r="15" fill="url(#lensGrad)"/>
+  <!-- Goggle specular highlights -->
+  <circle cx="101" cy="99" r="4.5" fill="#ECFEFF" fill-opacity="0.9"/>
+  <circle cx="145" cy="99" r="4.5" fill="#ECFEFF" fill-opacity="0.9"/>
+  <!-- Subtle grin / mandible spark -->
+  <path d="M116,130 Q128,138 140,130" fill="none" stroke="#F5B700" stroke-width="3.5" stroke-linecap="round"/>
+</svg>

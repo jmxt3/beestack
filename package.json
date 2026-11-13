@@ -1,0 +1,18 @@
+{
+  "name": "beestack",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "BeeStack: Dr. BeeBot and 12 OpenBot-native engineering, design, and fleet-hygiene skills",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "validate": "node scripts/validate-beestack.mjs",
+    "test": "node --test tests/beestack.test.mjs",
+    "doctor": "node scripts/beestack-cli.mjs doctor",
+    "bootstrap": "node scripts/beestack-cli.mjs bootstrap",
+    "sync": "node scripts/beestack-cli.mjs sync"
+  }
+}
