@@ -6,7 +6,7 @@ Paste this single line into OpenBot Desktop to install or update **Dr. BeeBot** 
 Read C:\Users\jmach\dev\beestack\BOOTSTRAP.md and run the BeeStack bootstrap.
 ```
 
-> Use ONLY OpenBot built-in tools (`list_local_skills`, `create_skill`, `revise_skill`, `install_local_skill`, `set_skill_enabled`, `list_agents`, `create_agent`, `read_agent`, `update_profile`, `update_agents`, `list_routines`, `create_routine`, `update_routine`, `remember`, `ask_user`).
+> Use ONLY OpenBot built-in tools (`list_local_skills`, `create_skill`, `revise_skill`, `install_local_skill`, `uninstall_skill`, `set_skill_enabled`, `list_agents`, `create_agent`, `read_agent`, `update_profile`, `update_agents`, `list_routines`, `create_routine`, `update_routine`, `remember`, `ask_user`).
 
 ## Step 1 — Stage Assets into Agent Workspace
 
@@ -34,28 +34,29 @@ Copy-Item -Force "$src\agent\dr-beebot-avatar.png" (Join-Path $dst "dr-beebot-av
 
 > **Retention Rule:** `create_skill` installs onto the calling agent; `uninstall_skill` on the last copy deletes it from the library. Never uninstall the 3 library skills from Dr. BeeBot—use `set_skill_enabled` with `enabled: false`.
 
-## Step 3 — Create or Update Dr. BeeBot
+## Step 3 — Create or Update Target BeeStack Agent
 
-Call `list_agents` for `Dr. BeeBot`:
-- **Already Dr. BeeBot:** call `update_profile` with `name`, `title`, `category`, `avatarHue: 55`, `avatarPath: "beestack-staging/dr-beebot-avatar.png"`, `timezone: "America/Sao_Paulo"`, and `description` from `agent/dr-beebot-profile.json`.
-- **Exists as another agent:** call `update_agents` (or `send_message` to Dr. BeeBot to call `update_profile`).
-- **Missing:** call `create_agent` with the exact fields above.
+Call `read_agent` on yourself and `list_agents`:
+- **Current agent is `Dr. BeeBot` or already holds `beestack-onboarding` / `beestack-agent-designer`:** treat the current agent as the target agent and call `update_profile` (preserving its existing `name` if already customized, otherwise `"Dr. BeeBot"`, and setting `title`, `category`, `avatarHue: 55`, `avatarPath: "beestack-staging/dr-beebot-avatar.png"`, `timezone: "America/Sao_Paulo"`, and `description` from `agent/dr-beebot-profile.json`).
+- **Another agent in `list_agents` is `Dr. BeeBot` or holds `beestack-onboarding`:** treat that agent as the target agent and call `update_agents` (or `send_message` to it to call `update_profile`).
+- **Missing:** call `create_agent` with the exact fields from `agent/dr-beebot-profile.json` and `avatarPath: "beestack-staging/dr-beebot-avatar.png"`.
 
-## Step 4 — Wire 7 Enabled + 3 Disabled Library Skills
+## Step 4 — Wire 7 Enabled + 3 Disabled Library Skills & Prune Retired Ones
 
-1. Attach all 10 skills to `Dr. BeeBot` via `install_local_skill` (skipping already-installed skills).
+1. Attach all 10 skills to the target agent via `install_local_skill` (skipping already-installed skills).
 2. Enable (`set_skill_enabled(..., true)`): `beestack-onboarding`, `beestack-agent-designer`, `beestack-make-ui`, `transcript-healthcheck`, `routine-healthcheck`, `beestack-teamwork`, `beestack-mode`.
-3. Park disabled (`set_skill_enabled(..., false)`): `beestack-architect`, `beestack-verify`, `beestack-unslop`. *(Verify Dr. BeeBot holds all 10 via `read_agent` before removing anything from a temporary bootstrap helper agent.)*
+3. Park disabled (`set_skill_enabled(..., false)`): `beestack-architect`, `beestack-verify`, `beestack-unslop`. *(Verify the target agent holds all 10 via `read_agent` before removing anything from a temporary bootstrap helper agent.)*
+4. Prune retired BeeStack skills: for any skill installed on the target agent whose slug starts with `beestack-` and is NOT one of the 10 canonical slugs in Steps 4.2–4.3, call `uninstall_skill` to remove it cleanly (never touch non-`beestack-*` skills such as `blackarch-*` or `openbot-*`).
 
 ## Step 5 — Configure Healthcheck Routines
 
-Call `list_routines` on `Dr. BeeBot` and ensure both routines from `agent/dr-beebot-profile.json` exist via `create_routine` / `update_routine`:
+Call `list_routines` on the target agent and ensure both routines from `agent/dr-beebot-profile.json` exist via `create_routine` / `update_routine`:
 1. `transcript-healthcheck` — `active: true`, `timezone: "America/Sao_Paulo"`, `schedule: { "kind": "weekdays", "time": "08:44" }`
 2. `routine-healthcheck` — `active: true`, `timezone: "America/Sao_Paulo"`, `schedule: { "kind": "weekly", "weekday": 1, "time": "08:49" }`
 
 ## Step 6 — Verify & Clean Up
 
-1. Call `read_agent` on `Dr. BeeBot` (confirm profile, avatar, 7 enabled + 3 disabled skills), `list_local_skills` (10 slugs), and `list_routines` (2 active routines).
+1. Call `read_agent` on the target agent (confirm profile, avatar, 7 enabled + 3 disabled BeeStack skills, zero retired `beestack-*` slugs, and all non-`beestack-*` skills preserved), `list_local_skills` (the 10 BeeStack slugs), and `list_routines` (2 active routines).
 2. Delete staging:
 
 ```powershell

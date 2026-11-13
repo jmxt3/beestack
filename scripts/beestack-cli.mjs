@@ -111,8 +111,8 @@ function buildSyncPrompt(repoRoot) {
     `Sync the BeeStack local skills library from ${skillsDir}.`,
     `1. Copy each skill directory under ${skillsDir} into a temporary workspace staging folder (e.g. beestack-staging/<slug>).`,
     `2. Call list_local_skills and compare against the 10 canonical skills; call revise_skill for any existing skill that changed or create_skill for any missing skill.`,
-    `3. Verify Dr. BeeBot's enabledSkills (7) and disabledLibrarySkills (3) match ${profilePath} (using set_skill_enabled so all 10 stay in the shared library), following ${bootstrapPath}.`,
-    `4. Verify with list_local_skills and read_agent, clean up the staging folder, and report updated/created/unchanged skills.`,
+    `3. Update the target BeeStack agent's profile description (and metadata) from ${profilePath} via update_profile / update_agents, ensure its enabledSkills (7) and disabledLibrarySkills (3) match ${profilePath} (using install_local_skill and set_skill_enabled so all 10 stay in the shared library), and call uninstall_skill on any installed beestack-* slug on the target agent that is not among the 10 canonical skills (leaving non-beestack-* skills untouched), following ${bootstrapPath}.`,
+    `4. Verify with list_local_skills and read_agent, clean up the staging folder, and report updated/created/uninstalled/unchanged skills.`,
   ].join("\n");
 }
 
