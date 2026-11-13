@@ -110,8 +110,8 @@ function buildSyncPrompt(repoRoot) {
   return [
     `Sync the BeeStack local skills library from ${skillsDir}.`,
     `1. Copy each skill directory under ${skillsDir} into a temporary workspace staging folder (e.g. beestack-staging/<slug>).`,
-    `2. Call list_local_skills and compare against the 12 canonical skills; call revise_skill for any existing skill that changed or create_skill for any missing skill.`,
-    `3. Verify Dr. BeeBot's enabledSkills (7) and disabledLibrarySkills (5) match ${profilePath} (using set_skill_enabled so all 12 stay in the shared library), following ${bootstrapPath}.`,
+    `2. Call list_local_skills and compare against the 10 canonical skills; call revise_skill for any existing skill that changed or create_skill for any missing skill.`,
+    `3. Verify Dr. BeeBot's enabledSkills (7) and disabledLibrarySkills (3) match ${profilePath} (using set_skill_enabled so all 10 stay in the shared library), following ${bootstrapPath}.`,
     `4. Verify with list_local_skills and read_agent, clean up the staging folder, and report updated/created/unchanged skills.`,
   ].join("\n");
 }
@@ -174,7 +174,7 @@ function runValidate(positional, flags) {
   } else {
     console.log(`BeeStack validation: ${result.ok ? "PASS" : "FAIL"} (${result.summary.repoRoot})`);
     console.log(
-      `Root files: ${result.summary.rootFilesChecked ?? 0}/5, Skills: ${result.summary.skillCount ?? 0}/12`
+      `Root files: ${result.summary.rootFilesChecked ?? 0}/5, Skills: ${result.summary.skillCount ?? 0}/10`
     );
     if (result.errors.length > 0) {
       console.error("\nErrors:");
@@ -211,7 +211,7 @@ function runDoctor(flags) {
   console.log("BeeStack Doctor");
   console.log(`- Repository (${report.repoRoot}): ${report.validation.ok ? "PASS" : "FAIL"}`);
   console.log(
-    `  Root files: ${report.validation.summary.rootFilesChecked ?? 0}/5 | Skills: ${report.validation.summary.skillCount ?? 0}/12`
+    `  Root files: ${report.validation.summary.rootFilesChecked ?? 0}/5 | Skills: ${report.validation.summary.skillCount ?? 0}/10`
   );
   if (!report.validation.ok) {
     for (const err of report.validation.errors) {

@@ -11,12 +11,12 @@ Built for shipping verified code changes inside a local repository or worktree.
 ### Required Local Skills (`install_local_skill`)
 - Always install:
   - `beestack-mode`
+  - `beestack-architect`
   - `beestack-verify`
   - `beestack-unslop`
 - Install when relevant to the agent's scope:
-  - `beestack-arch-review` (system/API/state-machine design, refactors, multi-module changes)
-  - `beestack-security-ship` (auth, untrusted inputs, secrets, webhooks, pre-release shipping gates)
   - `beestack-teamwork` (if coordinating or delegating to peer agents via `send_message`)
+  - `beestack-make-ui` (if building Tailscale webhook UIs)
 
 ### 4-Field Blueprint
 - **One Job**: Implement, debug, and verify scoped changes in `<repo-path>` using real test, lint, and build outputs as proof.
@@ -26,7 +26,7 @@ Built for shipping verified code changes inside a local repository or worktree.
 
 ### Post-Create Checklist
 1. `read_agent` to confirm workspace and tool access.
-2. `install_local_skill` for `beestack-mode`, `beestack-verify`, `beestack-unslop` (+ optional `beestack-arch-review`, `beestack-security-ship`).
+2. `install_local_skill` for `beestack-mode`, `beestack-architect`, `beestack-verify`, `beestack-unslop` (+ optional `beestack-teamwork`, `beestack-make-ui`).
 3. If the repo has no `verify-<repo>` local skill yet, instruct the agent on first run to execute `beestack-verify` and register `verify-<repo>` via `create_skill`.
 
 ---

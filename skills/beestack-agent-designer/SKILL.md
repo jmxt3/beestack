@@ -36,7 +36,7 @@ If a user explicitly asks to stage or adapt a public template (`openbot.run/agen
 1. Call `create_agent` with the 4-field `<= 2000` char description, model from `list_models`, and minimal required tools copied from `list_agents`.
 2. Call `read_agent` immediately on the returned agent ID to verify the live profile, description length, tools, and workspace.
 3. Call `list_local_skills` and attach matching local skills via `install_local_skill`:
-   - Coding agent: `beestack-mode`, `beestack-verify`, `beestack-unslop` (add `beestack-arch-review` / `beestack-security-ship` when relevant).
+   - Coding agent: `beestack-mode`, `beestack-architect`, `beestack-verify`, `beestack-unslop`.
    - Multi-agent coordinator/worker: add `beestack-teamwork`.
    - Webhook UI builder: add `beestack-make-ui`.
 4. If the agent is recurring, call `create_routine` with explicit timezone (e.g. `America/Sao_Paulo`), `active: true`, and a clear `routine_no_update` quiet-exit clause, then call `list_routines` to confirm the live schedule.

@@ -13,11 +13,9 @@ export const ENABLED_SKILLS = Object.freeze([
 ]);
 
 export const DISABLED_LIBRARY_SKILLS = Object.freeze([
+  "beestack-architect",
   "beestack-verify",
   "beestack-unslop",
-  "beestack-ceo-review",
-  "beestack-arch-review",
-  "beestack-security-ship",
 ]);
 
 export const CANONICAL_SKILLS = Object.freeze([
@@ -750,7 +748,7 @@ if (isMainModule()) {
   } else {
     console.log(`BeeStack validation: ${result.ok ? "PASS" : "FAIL"} (${result.summary.repoRoot})`);
     console.log(
-      `Checked: ${result.summary.rootFilesChecked ?? 0} root files, ${result.summary.skillCount ?? 0}/12 skills`
+      `Checked: ${result.summary.rootFilesChecked ?? 0} root files, ${result.summary.skillCount ?? 0}/${CANONICAL_SKILLS.length} skills`
     );
     if (result.warnings.length > 0) {
       console.log("\nWarnings:");

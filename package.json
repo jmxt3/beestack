@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "BeeStack: Dr. BeeBot and 12 OpenBot-native engineering, design, and fleet-hygiene skills",
+  "description": "BeeStack: Dr. BeeBot and 10 pure pstack + OpenBot skills",
   "license": "MIT",
   "engines": {
     "node": ">=18"

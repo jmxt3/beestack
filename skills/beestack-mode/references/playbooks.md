@@ -1,6 +1,6 @@
 # BeeStack Execution Playbooks
 
-Seven crisp OpenBot execution playbooks. Pick the one matching your current task shape and satisfy its exit gate before reporting done.
+Eight crisp OpenBot execution playbooks. Pick the one matching your current task shape and satisfy its exit gate before reporting done.
 
 ---
 
@@ -33,10 +33,10 @@ Seven crisp OpenBot execution playbooks. Pick the one matching your current task
 ## 3. `feature`
 **Use when**: Adding new user-facing or system capability.
 
-1. **Check premise & arch**: Run `beestack-ceo-review` if product value/scope is unclear; run `beestack-arch-review` if state machines, schemas, or multiple callers are affected.
-2. **Name data shapes**: Define schemas, payloads, CLI flags, and error shapes upfront.
+1. **Challenge premise & model arch**: Apply `Attack the Premise` from [principles.md](principles.md); run `beestack-architect` if schemas, statecharts, or multiple callers are affected.
+2. **Name data shapes**: Define payloads, persisted records, CLI flags, and error shapes upfront.
 3. **Build smallest vertical slice**: Wire one complete end-to-end path (input -> validation -> core logic -> persistence/output) before adding options.
-4. **Harden boundaries**: Apply `beestack-security-ship` checks on untrusted inputs, auth, secrets, and shell/network calls.
+4. **Harden boundaries**: Enforce `Boundary Discipline` from [principles.md](principles.md) on untrusted inputs, Vault secrets, `docker exec` arg arrays, HMAC signatures (`timingSafeEqual`), and path/SSRF guards.
 5. **Verify end-to-end**: Test happy path, edge cases, and failure modes against real runtime artifacts (including `openbot_browser` or `html_preview` for UI).
 
 **Verification Exit Gate**: End-to-end slice runs against real runtime inputs/UI, automated tests cover contract and failure paths, and `beestack-unslop` pass is complete.
@@ -91,3 +91,15 @@ Seven crisp OpenBot execution playbooks. Pick the one matching your current task
 5. **Encode prevention**: Add a regression test, healthcheck rule, or `remember` / `revise_skill` update.
 
 **Verification Exit Gate**: Root cause and timeline are backed by observed logs/artifacts, recovery is verified idempotent, and a preventive guard is in place or proposed.
+
+---
+
+## 8. `shipping`
+**Use when**: Babysitting an open PR to green, triaging automated review comments, or landing a stack of commits/PRs.
+
+1. **Triage comments skeptically**: Assess every review/CI comment on merits—fix real bugs with a failing test, dismiss nitpicks or false positives with a concrete technical reason.
+2. **Enforce boundary safety**: Verify zero leaked secrets/`.env` files, bounded inputs/timeouts, validated auth/HMAC/path boundaries, and idempotent retries.
+3. **Independent per-PR verdict**: Never treat "CI green" as safe alone. Inspect the full diff, verify `beestack-unslop`, and run `beestack-verify` / `verify-<repo>` after the final edit.
+4. **Land cleanly**: Confirm explicit user approval before force-push, merge, deploy, or public release; merge only the contiguous verified run from the root.
+
+**Verification Exit Gate**: Zero Blocker findings, final checks passed on head commit, clean `git status`, and explicit approval obtained before irreversible release/push actions.

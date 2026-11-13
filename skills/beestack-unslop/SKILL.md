@@ -20,7 +20,7 @@ Final hygiene pass for code, technical docs, and agent messages. Cut filler, fal
 - **Cut speculative abstractions**: Delete single-use interfaces, `Base*` wrappers, premature plugin registries, and unused option flags built for hypothetical future callers.
 - **Cut unrequested compatibility shims**: When migrating internal callers, update them and delete the old function/export immediately. Keep backward-compatibility shims only for explicit published/external contracts.
 - **No silent error swallowing**: Ban empty `catch {}` or fallback returns (`catch { return null; }`) that hide bugs. Propagate, log with context, or fail closed.
-- **No redundant internal checks**: Validate once at the system boundary (`beestack-arch-review` / `beestack-security-ship`). Do not repeat identical null/type guards in five private helpers.
+- **No redundant internal checks**: Validate once at the system boundary (`beestack-architect`). Do not repeat identical null/type guards in five private helpers.
 - **Remove dead weight**: Unused imports, unreachable branches, orphan helper files, and unnecessary temp variables go immediately.
 
 ## 3. `no-comments` Code Hygiene
